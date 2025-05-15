@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Home.css';
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const Home = () => {
+  const navigate = useNavigate();
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
@@ -13,6 +15,7 @@ const Home = () => {
     "Yeni şeyler öğrenmekten zevk duyan",
     "Pozitif",
     "Sorun Çözebilen",
+    "Uluslararası insan",
     "Yeni Nesil Mühendis"
   ], []);
 
@@ -93,20 +96,29 @@ const Home = () => {
         </div>
 
         <div className="mt-12">
-          <div className="flex justify-center items-center space-x-8">
-            {socialLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`social-media-link text-white/80 transition-all duration-300 ${link.color} transform hover:scale-110 hover:-translate-y-1`}
-                title={link.name}
-              >
-                {link.icon}
-                <span className="sr-only">{link.name}</span>
-              </a>
-            ))}
+          <div className="flex flex-col items-center space-y-8">
+            <button
+              onClick={() => navigate('/contact')}
+              className="px-8 py-3 bg-cyan-400 text-black font-bold rounded-full hover:bg-cyan-300 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-400/50"
+            >
+              Hire me
+            </button>
+            
+            <div className="flex justify-center items-center space-x-8">
+              {socialLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`social-media-link text-white/80 transition-all duration-300 ${link.color} transform hover:scale-110 hover:-translate-y-1`}
+                  title={link.name}
+                >
+                  {link.icon}
+                  <span className="sr-only">{link.name}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
