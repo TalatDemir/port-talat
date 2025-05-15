@@ -1,34 +1,43 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import BinaryRain from './components/BinaryRain';
-import Home from './pages/Home';
-import About from './pages/About';
-import Skills from './pages/Skills';
-import Portfolio from './pages/Portfolio';
-import Contact from './pages/Contact';
 import './styles/global.css';
 import './App.css';
+
+// Lazy loading ile sayfaları yükle
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Skills = lazy(() => import('./pages/Skills'));
+const Portfolio = lazy(() => import('./pages/Portfolio'));
+const Contact = lazy(() => import('./pages/Contact'));
+
+// Loading komponenti
+const LoadingScreen = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-cyan-400 text-2xl">Yükleniyor...</div>
+  </div>
+);
 
 const pageVariants = {
   initial: {
     opacity: 0,
     x: '100%',
     filter: 'blur(10px)',
-    transition: { duration: 0.5 }
+    transition: { duration: 0.3 }
   },
   animate: {
     opacity: 1,
     x: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.5 }
+    transition: { duration: 0.3 }
   },
   exit: {
     opacity: 0,
     x: '-100%',
     filter: 'blur(10px)',
-    transition: { duration: 0.5 }
+    transition: { duration: 0.3 }
   }
 };
 
@@ -50,19 +59,14 @@ const PageWrapper = ({ children, density }) => {
 const AnimatedRoutes = () => {
   const location = useLocation();
   
-  // Her sayfa için binary rain yoğunluğunu belirle
   const getDensity = (pathname) => {
     switch (pathname) {
       case '/':
-        return 1.0; // Ana sayfa - %100 yoğunluk
       case '/about':
-        return 1.0; // Hakkımda - %100 yoğunluk
       case '/skills':
-        return 1.0; // Yeteneklerim - %100 yoğunluk
       case '/portfolio':
-        return 1.0; // Projelerim - %100 yoğunluk
       case '/contact':
-        return 1.0; // İletişim - %100 yoğunluk
+        return 1.0;
       default:
         return 1;
     }
@@ -70,13 +74,15 @@ const AnimatedRoutes = () => {
 
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageWrapper density={getDensity('/')}><Home /></PageWrapper>} />
-        <Route path="/about" element={<PageWrapper density={getDensity('/about')}><About /></PageWrapper>} />
-        <Route path="/skills" element={<PageWrapper density={getDensity('/skills')}><Skills /></PageWrapper>} />
-        <Route path="/portfolio" element={<PageWrapper density={getDensity('/portfolio')}><Portfolio /></PageWrapper>} />
-        <Route path="/contact" element={<PageWrapper density={getDensity('/contact')}><Contact /></PageWrapper>} />
-      </Routes>
+      <Suspense fallback={<LoadingScreen />}>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageWrapper density={getDensity('/')}><Home /></PageWrapper>} />
+          <Route path="/about" element={<PageWrapper density={getDensity('/about')}><About /></PageWrapper>} />
+          <Route path="/skills" element={<PageWrapper density={getDensity('/skills')}><Skills /></PageWrapper>} />
+          <Route path="/portfolio" element={<PageWrapper density={getDensity('/portfolio')}><Portfolio /></PageWrapper>} />
+          <Route path="/contact" element={<PageWrapper density={getDensity('/contact')}><Contact /></PageWrapper>} />
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 };
@@ -86,7 +92,7 @@ function App() {
     <Router>
       <div className="min-h-screen bg-[#0a0a0a]">
         <Navbar />
-        <main className="min-h-[calc(100vh-4rem)]">
+        <main className="min-h-[calc(100vh-4rem)] pt-16">
           <AnimatedRoutes />
         </main>
       </div>
