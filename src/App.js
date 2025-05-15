@@ -56,13 +56,13 @@ const AnimatedRoutes = () => {
       case '/':
         return 1.0; // Ana sayfa - %100 yoğunluk
       case '/about':
-        return 0.9; // Hakkımda - %90 yoğunluk
+        return 1.0; // Hakkımda - %100 yoğunluk
       case '/skills':
-        return 0.8; // Yeteneklerim - %80 yoğunluk
+        return 1.0; // Yeteneklerim - %100 yoğunluk
       case '/portfolio':
-        return 0.7; // Projelerim - %70 yoğunluk
+        return 1.0; // Projelerim - %100 yoğunluk
       case '/contact':
-        return 0.5; // İletişim - %50 yoğunluk
+        return 1.0; // İletişim - %100 yoğunluk
       default:
         return 1;
     }

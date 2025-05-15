@@ -27,7 +27,7 @@ const Contact = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-4xl font-bold mb-12 text-center text-cyan-400">İletişim</h2>
+      <h2 className="text-4xl font-bold mb-12 text-center text-cyan-400 page-title">İletişim</h2>
       <div className="grid gap-8 md:grid-cols-2">
         {/* Form Card */}
         <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300">

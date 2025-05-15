@@ -97,4 +97,11 @@
   box-shadow: 
     0 8px 32px 0 rgba(72, 209, 204, 0.2),
     0 0 0 1px rgba(128, 71, 248, 0.1); /* Çift renkli glow efekti */
+}
+
+.page-title {
+  position: relative;
+  z-index: 10;
+  text-shadow: 0 0 10px rgba(13, 148, 136, 0.5);
+  background: none !important;
 } 
