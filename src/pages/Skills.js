@@ -93,7 +93,7 @@ const Skills = () => {
   return (
     <div className="min-h-screen py-16 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold text-cyan-400 text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold text-cyan-400 text-center mb-12 page-title">
           Yeteneklerim
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
