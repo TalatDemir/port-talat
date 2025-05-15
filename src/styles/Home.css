@@ -3,6 +3,11 @@
   width: 200px;
   height: 200px;
   margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.profile-frame:hover {
+  transform: scale(1.05);
 }
 
 .profile-border {
@@ -14,6 +19,12 @@
   border: 3px solid #0d9488;
   border-radius: 50%;
   padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.profile-frame:hover .profile-border {
+  border-color: #2dd4bf;
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.5);
 }
 
 .profile-photo {
@@ -23,6 +34,11 @@
   overflow: hidden;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.profile-frame:hover .profile-photo {
+  transform: scale(1.02);
 }
 
 .typing-cursor {

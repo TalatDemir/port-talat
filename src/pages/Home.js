@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Home.css';
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaFileDownload } from 'react-icons/fa';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -10,13 +10,13 @@ const Home = () => {
   const [isTyping, setIsTyping] = useState(true);
 
   const descriptions = useMemo(() => [
-    "İstekli",
-    "Mücadeleci",
-    "Yeni şeyler öğrenmekten zevk duyan",
-    "Pozitif",
-    "Sorun Çözebilen",
-    "Uluslararası insan",
-    "Yeni Nesil Mühendis"
+    "İstekli 💪",
+    "Mücadeleci 🎯",
+    "Yeni şeyler öğrenmekten zevk duyan 📚",
+    "Pozitif 😊",
+    "Sorun Çözebilen 🔧",
+    "Uluslararası insan 🌍",
+    "Yeni Nesil Mühendis 💻"
   ], []);
 
   useEffect(() => {
@@ -82,9 +82,13 @@ const Home = () => {
           </div>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-bold mb-8 text-cyan-400">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 text-cyan-400 hover:scale-105 transition-transform duration-300">
           Talat Demir
         </h1>
+        
+        <p className="text-xl text-gray-400 mb-8 hover:text-cyan-400 transition-colors duration-300">
+          Yazılım Geliştirici & Bilgisayar Mühendisi
+        </p>
         
         <div className="min-h-[3rem] flex items-center justify-center">
           <div className="typing-text-container">
@@ -97,12 +101,23 @@ const Home = () => {
 
         <div className="mt-12">
           <div className="flex flex-col items-center space-y-8">
-            <button
-              onClick={() => navigate('/contact')}
-              className="px-8 py-3 bg-cyan-400 text-black font-bold rounded-full hover:bg-cyan-300 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-400/50"
-            >
-              Hire me
-            </button>
+            <div className="flex space-x-4">
+              <button
+                onClick={() => navigate('/contact')}
+                className="px-8 py-3 bg-cyan-400 text-black font-bold rounded-full hover:bg-cyan-300 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-400/50"
+              >
+                Hire me
+              </button>
+              
+              <a
+                href="/TalatDemir_CV.pdf"
+                download
+                className="px-8 py-3 bg-gray-700 text-white font-bold rounded-full hover:bg-gray-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-gray-400/50 flex items-center space-x-2"
+              >
+                <FaFileDownload />
+                <span>CV</span>
+              </a>
+            </div>
             
             <div className="flex justify-center items-center space-x-8">
               {socialLinks.map((link, index) => (
