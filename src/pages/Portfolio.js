@@ -1,39 +1,35 @@
 import React from 'react';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 
 const Portfolio = () => {
   const projects = [
     {
       title: "Popping Balloons",
-      description: "Unity ve C# kullanılarak geliştirilen eğlenceli bir balon patlatma oyunu. Oyuncular, farklı renklerdeki balonları patlatarak puan kazanır ve çeşitli zorluk seviyeleriyle karşılaşır.",
+      description: "Unity ve C# öğrenme sürecimde geliştirdiğim ilk oyun projesi. Temel oyun geliştirme kavramlarını öğrenmek ve pratik yapmak amacıyla oluşturuldu. Basit ama eğlenceli bir balon patlatma oyunu.",
       technologies: ["Unity", "C#", "Game Development"],
-      github: "https://github.com/TalatDemir/Popping-Balloons",
-      demo: "https://demo-link-1.com",
-      image: "/projects/popping-balloons.jpg"
+      github: "https://github.com/TalatDemir",
+      image: "/poppingbaloons.png"
     },
     {
       title: "Voice Cloning",
-      description: "Python ve XTTS teknolojisi kullanılarak geliştirilen ses klonlama projesi. Kullanıcıların seslerini analiz ederek benzer ses üretimi yapabilen yapay zeka modeli.",
+      description: "Python ve XTTS teknolojisi (xtts_2 modeli) kullanılarak geliştirilen ses klonlama projesi. Kullanıcıların seslerini analiz ederek benzer ses üretimi yapabilen yapay zeka modeli.",
       technologies: ["Python", "XTTS", "AI", "Deep Learning"],
-      github: "https://github.com/TalatDemir/Voice-Cloning",
-      demo: "https://demo-link-2.com",
-      image: "/projects/voice-cloning.jpg"
+      github: "https://github.com/TalatDemir",
+      image: "/yapay_zeka.jpg"
     },
     {
       title: "Vehicle Rental System",
       description: "Qt5 ve Python kullanılarak geliştirilen araç kiralama sistemi. Kullanıcılar araç rezervasyonu yapabilir, araç bilgilerini görüntüleyebilir ve kiralama işlemlerini yönetebilir.",
       technologies: ["Python", "Qt5", "SQLite", "GUI Development"],
-      github: "https://github.com/TalatDemir/Vehicle-Rental-System",
-      demo: "https://demo-link-3.com",
-      image: "/projects/vehicle-rental.jpg"
+      github: "https://github.com/TalatDemir",
+      image: "/Qt5project.png"
     },
     {
       title: "Portfolio Website",
-      description: "React ve Tailwind CSS kullanılarak geliştirilen modern ve responsive portfolyo websitesi. Binary temalı animasyonlar ve smooth sayfa geçişleri içerir.",
+      description: "React ve Tailwind CSS kullanılarak geliştirdiğim kişisel portfolyo websitem. Binary temalı animasyonlar ve smooth sayfa geçişleri içeren modern ve responsive bir tasarıma sahip.",
       technologies: ["React", "Tailwind CSS", "Framer Motion"],
-      github: "https://github.com/TalatDemir/Portfolio",
-      demo: "https://demo-link-4.com",
-      image: "/projects/portfolio.jpg"
+      github: "https://github.com/TalatDemir",
+      image: "/port-talat.png"
     }
   ];
 
@@ -83,15 +79,6 @@ const Portfolio = () => {
                 >
                   <FaGithub />
                   <span>GitHub</span>
-                </a>
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-white/80 hover:text-cyan-400 transition-colors"
-                >
-                  <FaExternalLinkAlt />
-                  <span>Demo</span>
                 </a>
               </div>
             </div>

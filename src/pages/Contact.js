@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaPhone, FaEnvelope } from 'react-icons/fa';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -122,8 +122,15 @@ const Contact = () => {
             <h3 className="text-xl font-semibold mb-6 text-cyan-400">İletişim Bilgileri</h3>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
+                <FaEnvelope className="text-cyan-400" />
                 <a href="mailto:talatalat35@gmail.com" className="text-gray-300 hover:text-cyan-400 transition-colors">
                   talatalat35@gmail.com
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <FaPhone className="text-cyan-400" />
+                <a href="tel:+905555555555" className="text-gray-300 hover:text-cyan-400 transition-colors">
+                  +90 555 555 55 55
                 </a>
               </div>
             </div>

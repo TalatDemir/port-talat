@@ -50,6 +50,9 @@ const About = () => {
   return (
     <div className="min-h-screen py-12 px-4 md:px-6">
       <div className="max-w-5xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-bold text-cyan-400 text-center mb-12">
+          Hakkımda
+        </h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {sections.map((section, index) => (
             <div key={index} className="glass-container p-4 rounded-lg">
