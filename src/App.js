@@ -60,15 +60,19 @@ const AnimatedRoutes = memo(() => {
   const location = useLocation();
   
   const getDensity = (pathname) => {
+    // Mobil cihazlar için yoğunluğu azalt
+    const isMobile = window.innerWidth <= 768;
+    const baseDensity = isMobile ? 0.6 : 1.0;
+    
     switch (pathname) {
       case '/':
       case '/about':
       case '/skills':
       case '/portfolio':
       case '/contact':
-        return 1.0;
+        return baseDensity;
       default:
-        return 1;
+        return baseDensity;
     }
   };
 

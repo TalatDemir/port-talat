@@ -138,12 +138,28 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu - Sola alındı */}
-        <div 
+        <div
           className={`${
             isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
-          } fixed inset-y-0 left-0 w-64 bg-black/95 backdrop-blur-xl transform transition-all duration-300 ease-in-out md:hidden h-screen overflow-y-auto`}
+          } fixed inset-y-0 left-0 w-64 bg-black/95 backdrop-blur-xl transform transition-all duration-300 ease-in-out md:hidden h-screen overflow-y-auto z-50`}
         >
-          <div className="px-4 py-6 space-y-6">
+          {/* Menü kapatma butonu */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-4 right-4 p-2 rounded-md text-gray-300 hover:text-cyan-400 hover:bg-white/5 focus:outline-none"
+          >
+            <svg
+              className="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <div className="px-4 py-6 space-y-6 mt-12">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -160,6 +176,14 @@ const Navbar = () => {
             ))}
           </div>
         </div>
+
+        {/* Overlay for mobile menu */}
+        {isOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden z-40"
+            onClick={() => setIsOpen(false)}
+          />
+        )}
       </div>
     </nav>
   );
