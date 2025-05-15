@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, memo } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -14,49 +14,49 @@ const Portfolio = lazy(() => import('./pages/Portfolio'));
 const Contact = lazy(() => import('./pages/Contact'));
 
 // Loading komponenti
-const LoadingScreen = () => (
+const LoadingScreen = memo(() => (
   <div className="min-h-screen flex items-center justify-center">
     <div className="text-cyan-400 text-2xl">Yükleniyor...</div>
   </div>
-);
+));
 
 const pageVariants = {
   initial: {
     opacity: 0,
     x: '100%',
     filter: 'blur(10px)',
-    transition: { duration: 0.3 }
+    transition: { duration: 0.2, ease: 'easeInOut' }
   },
   animate: {
     opacity: 1,
     x: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.3 }
+    transition: { duration: 0.2, ease: 'easeInOut' }
   },
   exit: {
     opacity: 0,
     x: '-100%',
     filter: 'blur(10px)',
-    transition: { duration: 0.3 }
+    transition: { duration: 0.2, ease: 'easeInOut' }
   }
 };
 
-const PageWrapper = ({ children, density }) => {
+const PageWrapper = memo(({ children, density }) => {
   return (
     <motion.div
       initial="initial"
       animate="animate"
       exit="exit"
       variants={pageVariants}
-      className="page-wrapper min-h-screen"
+      className="page-wrapper min-h-screen will-change-transform"
     >
       <BinaryRain density={density} />
       {children}
     </motion.div>
   );
-};
+});
 
-const AnimatedRoutes = () => {
+const AnimatedRoutes = memo(() => {
   const location = useLocation();
   
   const getDensity = (pathname) => {
@@ -73,7 +73,7 @@ const AnimatedRoutes = () => {
   };
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" initial={false}>
       <Suspense fallback={<LoadingScreen />}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageWrapper density={getDensity('/')}><Home /></PageWrapper>} />
@@ -85,9 +85,9 @@ const AnimatedRoutes = () => {
       </Suspense>
     </AnimatePresence>
   );
-};
+});
 
-function App() {
+const App = memo(() => {
   return (
     <Router>
       <div className="min-h-screen bg-[#0a0a0a]">
@@ -98,6 +98,6 @@ function App() {
       </div>
     </Router>
   );
-}
+});
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
@@ -15,17 +15,34 @@ const Navbar = () => {
     { path: '/contact', label: 'İletişim' }
   ];
 
-  // Scroll yönetimi
+  // Scroll yönetimi - performans için throttle eklendi
+  const handleScroll = useCallback(() => {
+    const currentScrollPos = window.pageYOffset;
+    const isVisible = prevScrollPos > currentScrollPos || currentScrollPos < 10;
+    
+    if (visible !== isVisible) {
+      setVisible(isVisible);
+    }
+    setPrevScrollPos(currentScrollPos);
+  }, [prevScrollPos, visible]);
+
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
-      setPrevScrollPos(currentScrollPos);
+    let timeoutId;
+    const throttledScroll = () => {
+      if (!timeoutId) {
+        timeoutId = setTimeout(() => {
+          handleScroll();
+          timeoutId = null;
+        }, 100);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [prevScrollPos]);
+    window.addEventListener('scroll', throttledScroll);
+    return () => {
+      window.removeEventListener('scroll', throttledScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [handleScroll]);
 
   // Mobil menü açıkken scroll'u engelle
   useEffect(() => {
@@ -57,6 +74,8 @@ const Navbar = () => {
                   alt="Talat Demir"
                   className="w-full h-full object-cover"
                   loading="lazy"
+                  width="40"
+                  height="40"
                 />
               </div>
               <span className="text-xl sm:text-2xl font-bold text-cyan-400">
@@ -83,7 +102,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Sola alındı */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-cyan-400 hover:bg-white/5 focus:outline-none"
@@ -97,6 +116,8 @@ const Navbar = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 aria-hidden="true"
+                width="24"
+                height="24"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -107,6 +128,8 @@ const Navbar = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 aria-hidden="true"
+                width="24"
+                height="24"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -114,11 +137,11 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Sola alındı */}
         <div 
           className={`${
-            isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-          } fixed inset-y-0 right-0 w-64 bg-black/95 backdrop-blur-xl transform transition-all duration-300 ease-in-out md:hidden h-screen overflow-y-auto`}
+            isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+          } fixed inset-y-0 left-0 w-64 bg-black/95 backdrop-blur-xl transform transition-all duration-300 ease-in-out md:hidden h-screen overflow-y-auto`}
         >
           <div className="px-4 py-6 space-y-6">
             {navItems.map((item) => (
