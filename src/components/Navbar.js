@@ -11,6 +11,7 @@ const Navbar = () => {
     { path: '/', label: 'Ana Sayfa' },
     { path: '/about', label: 'Hakkımda' },
     { path: '/skills', label: 'Yeteneklerim' },
+    { path: '/services', label: 'Neler Yapabilirim' },
     { path: '/portfolio', label: 'Projelerim' },
     { path: '/contact', label: 'İletişim' }
   ];
@@ -19,7 +20,7 @@ const Navbar = () => {
   const handleScroll = useCallback(() => {
     const currentScrollPos = window.pageYOffset;
     const isVisible = prevScrollPos > currentScrollPos || currentScrollPos < 10;
-    
+
     if (visible !== isVisible) {
       setVisible(isVisible);
     }
@@ -58,7 +59,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav 
+    <nav
       className={`fixed w-full z-50 transition-transform duration-300 ${
         visible ? 'translate-y-0' : '-translate-y-full'
       }`}
@@ -189,4 +190,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;

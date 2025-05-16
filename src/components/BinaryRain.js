@@ -6,7 +6,7 @@ const BinaryRain = ({ density = 1 }) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    
+
     // Set canvas size to document height instead of window height
     const resizeCanvas = () => {
       const docHeight = Math.max(
@@ -18,7 +18,7 @@ const BinaryRain = ({ density = 1 }) => {
       );
       canvas.width = window.innerWidth;
       canvas.height = docHeight;
-      
+
       // Set high DPI for sharper text
       const dpr = window.devicePixelRatio || 1;
       canvas.style.width = canvas.width + 'px';
@@ -27,13 +27,15 @@ const BinaryRain = ({ density = 1 }) => {
       canvas.height *= dpr;
       ctx.scale(dpr, dpr);
     };
-    
+
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
     // Binary characters
     const binary = '10';
-    const fontSize = 10; // Daha küçük font boyutu
+    // Mobil cihazlar için daha büyük font boyutu
+    const isMobile = window.innerWidth <= 768;
+    const fontSize = isMobile ? 12 : 10; // Mobilde daha büyük font boyutu
     // Yoğunluğu density parametresine göre ayarla
     const baseColumns = Math.floor(canvas.width / (fontSize * 0.7)); // Daha sık kolonlar
     const columns = Math.floor(baseColumns * density);
@@ -44,7 +46,7 @@ const BinaryRain = ({ density = 1 }) => {
         speed: 1 + Math.random() * 0.5 // Her kolon için farklı hız
       };
     });
-    
+
     // Center point (profile photo position)
     const centerX = canvas.width / 2;
     const centerY = canvas.height * 0.35;
@@ -69,24 +71,26 @@ const BinaryRain = ({ density = 1 }) => {
         // Adjust opacity based on distance from center
         const maxDistance = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height);
         const opacity = (1 - (distance / maxDistance)) * density;
-        
+
         // Ana renk ve glow efekti
         const char = binary.charAt(Math.floor(Math.random() * binary.length));
-        
-        // Glow efekti
-        ctx.shadowBlur = 2;
-        ctx.shadowColor = 'rgba(13, 148, 136, 0.5)';
-        
-        // Karakteri çiz
-        ctx.fillStyle = `rgba(13, 148, 136, ${opacity})`;
+
+        // Mobil cihazlar için daha güçlü glow efekti
+        const isMobile = window.innerWidth <= 768;
+        ctx.shadowBlur = isMobile ? 3 : 2;
+        ctx.shadowColor = 'rgba(13, 148, 136, 0.6)';
+
+        // Karakteri çiz - mobilde daha yüksek opaklık
+        const adjustedOpacity = isMobile ? Math.min(opacity * 1.3, 1.0) : opacity;
+        ctx.fillStyle = `rgba(13, 148, 136, ${adjustedOpacity})`;
         ctx.fillText(char, x, y);
-        
+
         // Glow efektini sıfırla
         ctx.shadowBlur = 0;
 
         // Pozisyonu güncelle ve sayfanın altına gelince tekrar yukarı al
-        columnPositions[i].y = y >= canvas.height ? 
-          0 : 
+        columnPositions[i].y = y >= canvas.height ?
+          0 :
           y + fontSize * pos.speed;
       });
     };
@@ -106,12 +110,16 @@ const BinaryRain = ({ density = 1 }) => {
     };
   }, [density]);
 
+  // Mobil cihazlar için daha yüksek opaklık
+  const isMobile = window.innerWidth <= 768;
+  const opacityValue = isMobile ? 0.8 * density : 0.7 * density;
+
   return (
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full -z-10"
-      style={{ 
-        opacity: 0.7 * density,
+      style={{
+        opacity: opacityValue,
         minHeight: '100vh',
         height: '100%'
       }}
@@ -119,4 +127,4 @@ const BinaryRain = ({ density = 1 }) => {
   );
 };
 
-export default BinaryRain; 
+export default BinaryRain;

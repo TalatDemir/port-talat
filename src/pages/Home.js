@@ -21,7 +21,7 @@ const Home = () => {
 
   useEffect(() => {
     let timeout;
-    
+
     if (isTyping) {
       if (displayText.length < descriptions[currentTextIndex].length) {
         timeout = setTimeout(() => {
@@ -85,11 +85,11 @@ const Home = () => {
         <h1 className="text-4xl md:text-6xl font-bold mb-4 text-cyan-400 hover:scale-105 transition-transform duration-300">
           Talat Demir
         </h1>
-        
+
         <p className="text-xl text-gray-400 mb-8 hover:text-cyan-400 transition-colors duration-300">
           Yazılım Geliştirici & Bilgisayar Mühendisi
         </p>
-        
+
         <div className="min-h-[3rem] flex items-center justify-center">
           <div className="typing-text-container">
             <p className="text-xl md:text-2xl text-cyan-400 font-mono">
@@ -108,17 +108,18 @@ const Home = () => {
               >
                 Hire me
               </button>
-              
+
               <a
                 href="/TalatDemir_CV.pdf"
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-3 bg-gray-700 text-white font-bold rounded-full hover:bg-gray-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-gray-400/50 flex items-center space-x-2"
               >
                 <FaFileDownload />
                 <span>CV</span>
               </a>
             </div>
-            
+
             <div className="flex justify-center items-center space-x-8">
               {socialLinks.map((link, index) => (
                 <a
@@ -141,4 +142,4 @@ const Home = () => {
   );
 };
 
-export default Home; 
+export default Home;

@@ -129,8 +129,8 @@ const Contact = () => {
               </div>
               <div className="flex items-center gap-3">
                 <FaPhone className="text-cyan-400" />
-                <a href="tel:+905555555555" className="text-gray-300 hover:text-cyan-400 transition-colors">
-                  +90 555 555 55 55
+                <a href="tel:+905374916755" className="text-gray-300 hover:text-cyan-400 transition-colors">
+                  +90 537 491 67 55
                 </a>
               </div>
             </div>
@@ -141,4 +141,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

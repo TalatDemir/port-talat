@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, memo } from 'react';
+import React, { lazy, Suspense, memo, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -10,6 +10,7 @@ import './App.css';
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Skills = lazy(() => import('./pages/Skills'));
+const Services = lazy(() => import('./pages/Services'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
 const Contact = lazy(() => import('./pages/Contact'));
 
@@ -48,26 +49,30 @@ const PageWrapper = memo(({ children, density }) => {
       animate="animate"
       exit="exit"
       variants={pageVariants}
-      className="page-wrapper min-h-screen will-change-transform"
+      className="page-wrapper will-change-transform"
+      style={{ minHeight: '100vh' }}
     >
       <BinaryRain density={density} />
-      {children}
+      <div className="page-content">
+        {children}
+      </div>
     </motion.div>
   );
 });
 
 const AnimatedRoutes = memo(() => {
   const location = useLocation();
-  
+
   const getDensity = (pathname) => {
-    // Mobil cihazlar için yoğunluğu azalt
+    // Mobil cihazlar için yoğunluğu artır (%80)
     const isMobile = window.innerWidth <= 768;
-    const baseDensity = isMobile ? 0.6 : 1.0;
-    
+    const baseDensity = isMobile ? 0.8 : 1.0;
+
     switch (pathname) {
       case '/':
       case '/about':
       case '/skills':
+      case '/services':
       case '/portfolio':
       case '/contact':
         return baseDensity;
@@ -83,6 +88,7 @@ const AnimatedRoutes = memo(() => {
           <Route path="/" element={<PageWrapper density={getDensity('/')}><Home /></PageWrapper>} />
           <Route path="/about" element={<PageWrapper density={getDensity('/about')}><About /></PageWrapper>} />
           <Route path="/skills" element={<PageWrapper density={getDensity('/skills')}><Skills /></PageWrapper>} />
+          <Route path="/services" element={<PageWrapper density={getDensity('/services')}><Services /></PageWrapper>} />
           <Route path="/portfolio" element={<PageWrapper density={getDensity('/portfolio')}><Portfolio /></PageWrapper>} />
           <Route path="/contact" element={<PageWrapper density={getDensity('/contact')}><Contact /></PageWrapper>} />
         </Routes>
@@ -96,7 +102,7 @@ const App = memo(() => {
     <Router>
       <div className="min-h-screen bg-[#0a0a0a]">
         <Navbar />
-        <main className="min-h-[calc(100vh-4rem)] pt-16">
+        <main className="min-h-screen pt-16">
           <AnimatedRoutes />
         </main>
       </div>
