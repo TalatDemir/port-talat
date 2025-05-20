@@ -41,11 +41,7 @@ const Services = () => {
       icon: <FaRobot className="text-5xl text-cyan-400 mb-4" />,
       description: "Bu alanla uğraşmak bana zevk veriyor. Python ve XTTS teknolojisi kullanarak ses klonlama projeleri geliştiriyorum. Hazır frameworkler ve kütüphaneler kullanarak yapay zeka çalışmaları yapıyor, özellikle ses teknolojileri konusunda uzmanlaşmaya çalışıyorum.",
       technologies: [
-        {
-          name: "TensorFlow",
-          icon: <SiTensorflow className="text-3xl text-cyan-400" />,
-          description: "Derin öğrenme modelleri"
-        },
+
         {
           name: "NumPy",
           icon: <SiNumpy className="text-3xl text-cyan-400" />,
@@ -91,8 +87,8 @@ const Services = () => {
 
         <div className="space-y-16">
           {services.map((service, index) => (
-            <div key={index} className="glass-container p-6 rounded-lg">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+            <div key={index} className="glass-container p-6 rounded-lg ">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-6" >
                 <div className="flex-shrink-0 flex items-center justify-center w-24 h-24 rounded-full bg-black/30 backdrop-blur-lg">
                   {service.icon}
                 </div>

@@ -12,7 +12,7 @@ const Portfolio = () => {
     },
     {
       title: "Voice Cloning",
-      description: "Python ve XTTS teknolojisi (xtts_2 modeli) kullanılarak geliştirilen ses klonlama projesi. Kullanıcıların seslerini analiz ederek benzer ses üretimi yapabilen yapay zeka modeli.",
+      description: "Python ve XTTS teknolojisi (xtts_2 modeli) kullanılarak geliştirilen ses klonlama projesi. Kullanıcıların seslerini analiz ederek benzer ses üretimi yapabilen ve kullanıcıların seslerinin özelliklerini çıkartan basit bir yapay zeka projesi.",
       technologies: ["Python", "XTTS", "AI", "Deep Learning"],
       github: "https://github.com/TalatDemir",
       image: "/yapay_zeka.jpg"
